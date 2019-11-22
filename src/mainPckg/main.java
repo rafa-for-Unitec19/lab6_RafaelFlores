@@ -1,21 +1,28 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+    Manejo de Productos
  */
 package mainPckg;
 
-/**
- *
- * @author Faith
- */
+
+import java.awt.HeadlessException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 public class main extends javax.swing.JFrame {
 
-    /**
-     * Creates new form main
-     */
     public main() {
         initComponents();
+        this.dateCHFecha.setDate(new Date());
+        ProductMan.cargarArchivo();
+        inventario = ProductMan.getListaPersona();
+        modelo = (DefaultTableModel) this.tblProductos.getModel();
+        setCargar();
     }
 
     /**
@@ -27,21 +34,454 @@ public class main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblProductos = new javax.swing.JTable();
+        txtNombre = new javax.swing.JTextField();
+        txtMarca = new javax.swing.JTextField();
+        spnCodigo = new javax.swing.JSpinner();
+        spnAzucar = new javax.swing.JSpinner();
+        spnAlcohol = new javax.swing.JSpinner();
+        spnLote = new javax.swing.JSpinner();
+        spnCantidad = new javax.swing.JSpinner();
+        spnPercio = new javax.swing.JSpinner();
+        cmbNacional = new javax.swing.JComboBox<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        lstColorantes = new javax.swing.JList<>();
+        btnAgregar = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        cmbColorantes = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+        dateCHFecha = new com.toedter.calendar.JDateChooser();
+        jLabel11 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        tblProductos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre", "Marca", "Codigo", "Cant. Azucar", "Cant. Alcohol", "Lote", "Producto Nacional", "Precio", "Colorantes", "Cantidad", "Vencimiento"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.Float.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblProductos);
+
+        spnCodigo.setModel(new javax.swing.SpinnerNumberModel(10203001, 10203001, 99999999, 1));
+
+        spnAzucar.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+
+        spnAlcohol.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 1));
+
+        spnLote.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+
+        spnCantidad.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+
+        spnPercio.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 1.0d));
+
+        cmbNacional.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nacional", "Extranjero" }));
+
+        lstColorantes.setModel(new DefaultListModel());
+        jScrollPane2.setViewportView(lstColorantes);
+
+        btnAgregar.setText("Agregar");
+        btnAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAgregarMouseClicked(evt);
+            }
+        });
+
+        btnModificar.setText("Modificar");
+        btnModificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnModificarMouseClicked(evt);
+            }
+        });
+
+        btnEliminar.setText("Eliminar");
+
+        jLabel1.setText("Nombre");
+
+        jLabel2.setText("Marca");
+
+        jLabel3.setText("Origen");
+
+        jLabel4.setText("Codigo");
+
+        jLabel5.setText("Cant. Azucar");
+
+        jLabel6.setText("Cant. Alcohol");
+
+        jLabel7.setText("Lote");
+
+        jLabel8.setText("Cantidad");
+
+        jLabel9.setText("Precio");
+
+        jLabel10.setText("Colorantes");
+
+        cmbColorantes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Azul-4", "Rojo-69", "Verde-420", "Amarillo-77", "Blanco-07" }));
+
+        jButton1.setText("Agregar Colorantes");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+
+        jLabel11.setText("Fecha");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbNacional, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cmbColorantes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(spnCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                                .addGap(52, 52, 52)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnAgregar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnModificar)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnEliminar)
+                                .addGap(14, 14, 14))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(spnAzucar))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(spnAlcohol))
+                                        .addGap(29, 29, 29)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel7)
+                                            .addComponent(spnLote, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(30, 30, 30)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(spnCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel8))
+                                        .addGap(166, 166, 166)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel9)
+                                            .addComponent(spnPercio, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jLabel11)
+                                    .addComponent(dateCHFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cmbNacional, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(dateCHFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9))
+                        .addGap(8, 8, 8)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(spnCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spnAzucar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spnAlcohol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spnLote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spnCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spnPercio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cmbColorantes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1)
+                                .addGap(16, 16, 16))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnAgregar)
+                        .addComponent(btnModificar)
+                        .addComponent(btnEliminar)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        DefaultListModel modeloLista =  (DefaultListModel) this.lstColorantes.getModel();
+        Boolean flag = false;
+        for (int i = 0; i < modeloLista.getSize(); i++) {
+            if (modeloLista.elementAt(i).toString().equals(this.cmbColorantes.getSelectedItem().toString())) {
+                JOptionPane.showMessageDialog(this, "No puede tener 2 o mas colorantes iguales");
+                flag = true;
+                break;
+            }
+        }
+        if (!flag) {
+            modeloLista.addElement(this.cmbColorantes.getSelectedItem());
+        }
+        lstColorantes.setModel(modeloLista);
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void btnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseClicked
+        modelo = (DefaultTableModel) this.tblProductos.getModel();
+        modeloLista = (DefaultListModel) this.lstColorantes.getModel();
+        if (this.txtNombre.getText().equals("") || this.txtMarca.getText().equals("")) {
+           JOptionPane.showMessageDialog(this, "Debe llenar todos los campos!!!!!!"); 
+        }else{
+            if (modeloLista.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Debe escoger al menos un colorante!!!");
+            } else {
+                Date fechaRaw = this.dateCHFecha.getDate();
+                String Fecha = fechaRaw.getDay() + "/" + fechaRaw.getMonth() + "/" + fechaRaw.getYear();
+                String Colorantes = "";
+                for (int i = 0; i < modeloLista.size(); i++) {
+                    if (i == 0) {
+                        Colorantes += modeloLista.elementAt(i);
+                    } else {
+                        Colorantes += ", " + modeloLista.elementAt(i);
+                    }
+
+                }
+                Boolean nac;
+                nac = this.cmbNacional.getSelectedItem().toString().equals("Nacional");
+                Producto pro = new Producto(Integer.parseInt(this.spnCodigo.getValue().toString()), Integer.parseInt(this.spnAzucar.getValue().toString()), Integer.parseInt(this.spnAlcohol.getValue().toString()),
+                        Integer.parseInt(this.spnLote.getValue().toString()), Integer.parseInt(this.spnCantidad.getValue().toString()), this.txtMarca.getText(), this.txtNombre.getText(),
+                        Colorantes, Double.parseDouble(this.spnPercio.getValue().toString()), Fecha, nac);
+                inventario.add(pro);
+                Object row[] = {
+                    pro.getNombre(),
+                    pro.getMarca(),
+                    pro.getCodigo(),
+                    pro.getCantAzucar(),
+                    pro.getCantAlcohol(),
+                    pro.getNumLote(),
+                    pro.isNacional(),
+                    pro.getPrecio(),
+                    pro.getColorantes(),
+                    pro.getCantidad(),
+                    pro.getVence(),};
+                modelo.addRow(row);
+                this.tblProductos.setModel(modelo);
+                ProductMan.setListaPersona(inventario);
+                try {
+                    ProductMan.escribirArchivo();
+                } catch (IOException ex) {
+                    Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }//GEN-LAST:event_btnAgregarMouseClicked
+
+    private void btnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseClicked
+        modelo = (DefaultTableModel) this.tblProductos.getModel();
+        if (this.tblProductos.getSelectedRow() >= 0) {
+            int col = this.tblProductos.getSelectedColumn();
+            switch (col) {
+                case 0:
+                    String nombre = JOptionPane.showInputDialog("Ingrese el nuevo Nombre");
+                    for (int i = 0; i < inventario.size(); i++) {
+                        if (modelo.getValueAt(this.tblProductos.getSelectedRow(), 0).equals(inventario.get(i).getNombre())) {
+                            inventario.get(i).setNombre(nombre);
+                        }
+                    }
+                    modelo.setValueAt(nombre, this.tblProductos.getSelectedRow(), col);
+                    break;
+                case 1:
+                    String marca = JOptionPane.showInputDialog("Ingrese el nuevo Autor");
+                    for (int i = 0; i < inventario.size(); i++) {
+                        if (modelo.getValueAt(this.tblProductos.getSelectedRow(), 0).equals(inventario.get(i).getMarca())) {
+                            inventario.get(i).setMarca(marca);
+                        }
+                    }
+                    modelo.setValueAt(marca, this.tblProductos.getSelectedRow(), col);
+                    break;
+                case 2:
+                    String descrip = JOptionPane.showInputDialog("Ingrese la nueva Descripcion");
+                    for (int i = 0; i < libros.size(); i++) {
+                        if (modelo.getValueAt(this.tblProductos.getSelectedRow(), 0).equals(libros.get(i).getDescrip())) {
+                            libros.get(i).setDescrip(descrip);
+                        }
+                    }
+                    modelo.setValueAt(descrip, this.tblProductos.getSelectedRow(), col);
+                    break;
+                case 3:
+                    String fecha = JOptionPane.showInputDialog("Ingrese la nueva fecha (dd-MM-yyyy)");
+                    for (int i = 0; i < libros.size(); i++) {
+                        if (modelo.getValueAt(this.tblProductos.getSelectedRow(), 0).equals(libros.get(i).getFechaLanzamiento())) {
+                            libros.get(i).setFechaLanzamiento(fecha);
+                        }
+                    }
+                    modelo.setValueAt(fecha, this.tblProductos.getSelectedRow(), col);
+                    break;
+                case 4:
+                    try {
+                        int puntos = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la nueva puntuacion"));
+                        if (puntos > 0 && puntos < 6) {
+                            for (int i = 0; i < libros.size(); i++) {
+                                if (modelo.getValueAt(this.tblProductos.getSelectedRow(), 0).equals(libros.get(i).getPuntos())) {
+                                    libros.get(i).setPuntos(puntos);
+                                }
+                            }
+                            modelo.setValueAt(puntos, this.tblProductos.getSelectedRow(), col);
+                        }else{
+                            JOptionPane.showMessageDialog(this, "No puede ingresar una puntuacion menor a 1 o mayor a 5");
+                        }
+                    } catch (HeadlessException | NumberFormatException e) {
+                        JOptionPane.showMessageDialog(this, "No puede ingresar otro caracter aparte de numeros!!!");
+                    }
+                    break;
+                case 5:
+                    try {
+                        int edicion = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la nueva Edicion"));
+                        if (edicion > 0) {
+                            for (int i = 0; i < libros.size(); i++) {
+                                if (modelo.getValueAt(this.jtLibro.getSelectedRow(), 0).equals(libros.get(i).getEdicion())) {
+                                    libros.get(i).setEdicion(edicion);
+                                }
+                            }
+                            modelo.setValueAt(edicion, this.jtLibro.getSelectedRow(), col);
+                        }else{
+                            JOptionPane.showMessageDialog(this, "No puede ingresar una Edicion menor a 1 ");
+                        }
+                    } catch (HeadlessException | NumberFormatException e) {
+                        JOptionPane.showMessageDialog(this, "No puede ingresar otro caracter aparte de numeros!!!");
+                    }
+                    break;
+                case 6:
+                    try {
+                        int copias = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la nueva Edicion"));
+                        if (copias > 0) {
+                            for (int i = 0; i < libros.size(); i++) {
+                                if (modelo.getValueAt(this.jtLibro.getSelectedRow(), 0).equals(libros.get(i).getCopias())) {
+                                    libros.get(i).setCopias(copias);
+                                }
+                            }
+                            modelo.setValueAt(copias, this.jtLibro.getSelectedRow(), col);
+                        }else{
+                            JOptionPane.showMessageDialog(this, "No puede ingresar una puntuacion menor a 1 ");
+                        }
+                    } catch (HeadlessException | NumberFormatException e) {
+                        JOptionPane.showMessageDialog(this, "No puede ingresar otro caracter aparte de numeros!!!");
+                    }
+                    break;
+                case 7:
+                    String genero = JOptionPane.showInputDialog("Ingrese el nuevo genero");
+                    for (int i = 0; i < genre.length; i++) {
+                        if (genero.equals(genre[i])) {
+                            for (int j = 0; j < libros.size(); j++) {
+                                if (modelo.getValueAt(this.jtLibro.getSelectedRow(), 0).equals(libros.get(j).getGenero())) {
+                                    libros.get(j).setGenero(genero);
+                                }
+                            }
+                            modelo.setValueAt(genero, this.jtLibro.getSelectedRow(), col);
+                            break;
+                        }
+                        if (i == genre.length-1) {
+                            JOptionPane.showMessageDialog(this, "No puede Ingresar ese genero!!!");
+                        }
+                    }
+                    break;
+                case 8:
+                    try {
+                        double precio = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el nuevo Precio"));
+                        if (precio > 0) {
+                            for (int i = 0; i < libros.size(); i++) {
+                                if (modelo.getValueAt(this.jtLibro.getSelectedRow(), 0).equals(libros.get(i).getPrecio())) {
+                                    libros.get(i).setPrecio(precio);
+                                }
+                            }
+                            modelo.setValueAt(precio, this.jtLibro.getSelectedRow(), col);
+                        }else{
+                            JOptionPane.showMessageDialog(this, "No puede ingresar un precio menor a 1 ");
+                        }
+                    } catch (HeadlessException | NumberFormatException e) {
+                        JOptionPane.showMessageDialog(this, "No puede ingresar otro caracter aparte de numeros!!!");
+                    }
+                    break;
+            }
+            this.jtLibro.setModel(modelo);
+        }
+    }//GEN-LAST:event_btnModificarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -54,7 +494,7 @@ public class main extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -77,7 +517,62 @@ public class main extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void setCargar(){
+        for (int i = 0; i < inventario.size(); i++) {
+            Producto pro = inventario.get(i);
+            Object row[] ={
+                pro.getNombre(),
+                    pro.getMarca(),
+                    pro.getCodigo(),
+                    pro.getCantAzucar(),
+                    pro.getCantAlcohol(),
+                    pro.getNumLote(),
+                    pro.isNacional(),
+                    pro.getPrecio(),
+                    pro.getColorantes(),
+                    pro.getCantidad(),
+                    pro.getVence(),
+            };
+            modelo.addRow(row);
+            this.tblProductos.setModel(modelo);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnModificar;
+    private javax.swing.JComboBox<String> cmbColorantes;
+    private javax.swing.JComboBox<String> cmbNacional;
+    private com.toedter.calendar.JDateChooser dateCHFecha;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JList<String> lstColorantes;
+    private javax.swing.JSpinner spnAlcohol;
+    private javax.swing.JSpinner spnAzucar;
+    private javax.swing.JSpinner spnCantidad;
+    private javax.swing.JSpinner spnCodigo;
+    private javax.swing.JSpinner spnLote;
+    private javax.swing.JSpinner spnPercio;
+    private javax.swing.JTable tblProductos;
+    private javax.swing.JTextField txtMarca;
+    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
+    ManejoProducto ProductMan = new ManejoProducto("./Productos.txt");
+    ArrayList<Producto> inventario;
+    public DefaultTableModel modelo;
+    public DefaultListModel modeloLista;
 }
