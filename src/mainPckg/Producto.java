@@ -117,7 +117,8 @@ public class Producto {
     @Override
     public String toString() {
         //Regresa aqui wey
-        return "Producto{" + '}';
+        
+        return nombre;
     }
     
     

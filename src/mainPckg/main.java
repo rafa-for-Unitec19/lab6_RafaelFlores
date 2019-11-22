@@ -22,6 +22,24 @@ public class main extends javax.swing.JFrame {
         ProductMan.cargarArchivo();
         inventario = ProductMan.getListaPersona();
         modelo = (DefaultTableModel) this.tblProductos.getModel();
+        this.tglCambio.setText("Funcion Agregar");
+        this.btnEliminar.setEnabled(false);
+        this.btnModificar.setEnabled(false);
+        this.txtMarca.setEnabled(true);
+        this.txtNombre.setEnabled(true);
+        this.cmbColorantes.setEnabled(true);
+        this.cmbNacional.setEnabled(true);
+        this.spnAlcohol.setEnabled(true);
+        this.spnAzucar.setEnabled(true);
+        this.spnCantidad.setEnabled(true);
+        this.spnCodigo.setEnabled(true);
+        this.spnLote.setEnabled(true);
+        this.spnPercio.setEnabled(true);
+        this.lstColorantes.setEnabled(true);
+        this.btnAgrColorante.setEnabled(true);
+        this.dateCHFecha.setEnabled(true);
+        this.btnAgregar.setEnabled(true);
+
         setCargar();
     }
 
@@ -34,6 +52,13 @@ public class main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jdConsulta = new javax.swing.JDialog();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblProductosFact = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        lstFactura = new javax.swing.JList<>();
+        btnGenerarFactura = new javax.swing.JButton();
+        btnAgregarListaFactura = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProductos = new javax.swing.JTable();
         txtNombre = new javax.swing.JTextField();
@@ -61,9 +86,64 @@ public class main extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         cmbColorantes = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        btnAgrColorante = new javax.swing.JButton();
         dateCHFecha = new com.toedter.calendar.JDateChooser();
         jLabel11 = new javax.swing.JLabel();
+        tglCambio = new javax.swing.JToggleButton();
+        btnFactura = new javax.swing.JButton();
+
+        tblProductosFact.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane3.setViewportView(tblProductosFact);
+
+        lstFactura.setModel(new DefaultListModel());
+        jScrollPane4.setViewportView(lstFactura);
+
+        btnGenerarFactura.setText("Generar Factura");
+
+        btnAgregarListaFactura.setText("Agregar a La Lista");
+        btnAgregarListaFactura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarListaFacturaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jdConsultaLayout = new javax.swing.GroupLayout(jdConsulta.getContentPane());
+        jdConsulta.getContentPane().setLayout(jdConsultaLayout);
+        jdConsultaLayout.setHorizontalGroup(
+            jdConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jdConsultaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jdConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnGenerarFactura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(jdConsultaLayout.createSequentialGroup()
+                        .addComponent(btnAgregarListaFactura)
+                        .addGap(0, 96, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jdConsultaLayout.setVerticalGroup(
+            jdConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jdConsultaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jdConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jdConsultaLayout.createSequentialGroup()
+                        .addComponent(btnAgregarListaFactura)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane4))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnGenerarFactura)
+                .addContainerGap())
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -124,6 +204,11 @@ public class main extends javax.swing.JFrame {
         });
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Nombre");
 
@@ -147,14 +232,29 @@ public class main extends javax.swing.JFrame {
 
         cmbColorantes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Azul-4", "Rojo-69", "Verde-420", "Amarillo-77", "Blanco-07" }));
 
-        jButton1.setText("Agregar Colorantes");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnAgrColorante.setText("Agregar Colorantes");
+        btnAgrColorante.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                btnAgrColoranteMouseClicked(evt);
             }
         });
 
         jLabel11.setText("Fecha");
+
+        tglCambio.setSelected(true);
+        tglCambio.setText("Agregar (Habilitar Controles)");
+        tglCambio.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                tglCambioItemStateChanged(evt);
+            }
+        });
+
+        btnFactura.setText("Facturacion");
+        btnFactura.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnFacturaMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -182,7 +282,7 @@ public class main extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel10)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnAgrColorante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(cmbColorantes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18))
                             .addGroup(layout.createSequentialGroup()
@@ -192,11 +292,16 @@ public class main extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnAgregar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnModificar)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnEliminar)
+                                .addComponent(btnFactura)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnAgregar)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnModificar)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnEliminar))
+                                    .addComponent(tglCambio))
                                 .addGap(14, 14, 14))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -273,20 +378,24 @@ public class main extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cmbColorantes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton1)
+                                .addComponent(btnAgrColorante)
                                 .addGap(16, 16, 16))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnAgregar)
-                        .addComponent(btnModificar)
-                        .addComponent(btnEliminar)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(tglCambio)
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAgregar)
+                            .addComponent(btnModificar)
+                            .addComponent(btnEliminar)
+                            .addComponent(btnFactura))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void btnAgrColoranteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgrColoranteMouseClicked
         DefaultListModel modeloLista =  (DefaultListModel) this.lstColorantes.getModel();
         Boolean flag = false;
         for (int i = 0; i < modeloLista.getSize(); i++) {
@@ -300,7 +409,7 @@ public class main extends javax.swing.JFrame {
             modeloLista.addElement(this.cmbColorantes.getSelectedItem());
         }
         lstColorantes.setModel(modeloLista);
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_btnAgrColoranteMouseClicked
 
     private void btnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseClicked
         modelo = (DefaultTableModel) this.tblProductos.getModel();
@@ -375,113 +484,87 @@ public class main extends javax.swing.JFrame {
                     }
                     modelo.setValueAt(marca, this.tblProductos.getSelectedRow(), col);
                     break;
-                case 2:
-                    String descrip = JOptionPane.showInputDialog("Ingrese la nueva Descripcion");
-                    for (int i = 0; i < libros.size(); i++) {
-                        if (modelo.getValueAt(this.tblProductos.getSelectedRow(), 0).equals(libros.get(i).getDescrip())) {
-                            libros.get(i).setDescrip(descrip);
-                        }
-                    }
-                    modelo.setValueAt(descrip, this.tblProductos.getSelectedRow(), col);
-                    break;
-                case 3:
-                    String fecha = JOptionPane.showInputDialog("Ingrese la nueva fecha (dd-MM-yyyy)");
-                    for (int i = 0; i < libros.size(); i++) {
-                        if (modelo.getValueAt(this.tblProductos.getSelectedRow(), 0).equals(libros.get(i).getFechaLanzamiento())) {
-                            libros.get(i).setFechaLanzamiento(fecha);
-                        }
-                    }
-                    modelo.setValueAt(fecha, this.tblProductos.getSelectedRow(), col);
-                    break;
-                case 4:
-                    try {
-                        int puntos = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la nueva puntuacion"));
-                        if (puntos > 0 && puntos < 6) {
-                            for (int i = 0; i < libros.size(); i++) {
-                                if (modelo.getValueAt(this.tblProductos.getSelectedRow(), 0).equals(libros.get(i).getPuntos())) {
-                                    libros.get(i).setPuntos(puntos);
-                                }
-                            }
-                            modelo.setValueAt(puntos, this.tblProductos.getSelectedRow(), col);
-                        }else{
-                            JOptionPane.showMessageDialog(this, "No puede ingresar una puntuacion menor a 1 o mayor a 5");
-                        }
-                    } catch (HeadlessException | NumberFormatException e) {
-                        JOptionPane.showMessageDialog(this, "No puede ingresar otro caracter aparte de numeros!!!");
-                    }
-                    break;
-                case 5:
-                    try {
-                        int edicion = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la nueva Edicion"));
-                        if (edicion > 0) {
-                            for (int i = 0; i < libros.size(); i++) {
-                                if (modelo.getValueAt(this.jtLibro.getSelectedRow(), 0).equals(libros.get(i).getEdicion())) {
-                                    libros.get(i).setEdicion(edicion);
-                                }
-                            }
-                            modelo.setValueAt(edicion, this.jtLibro.getSelectedRow(), col);
-                        }else{
-                            JOptionPane.showMessageDialog(this, "No puede ingresar una Edicion menor a 1 ");
-                        }
-                    } catch (HeadlessException | NumberFormatException e) {
-                        JOptionPane.showMessageDialog(this, "No puede ingresar otro caracter aparte de numeros!!!");
-                    }
-                    break;
-                case 6:
-                    try {
-                        int copias = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la nueva Edicion"));
-                        if (copias > 0) {
-                            for (int i = 0; i < libros.size(); i++) {
-                                if (modelo.getValueAt(this.jtLibro.getSelectedRow(), 0).equals(libros.get(i).getCopias())) {
-                                    libros.get(i).setCopias(copias);
-                                }
-                            }
-                            modelo.setValueAt(copias, this.jtLibro.getSelectedRow(), col);
-                        }else{
-                            JOptionPane.showMessageDialog(this, "No puede ingresar una puntuacion menor a 1 ");
-                        }
-                    } catch (HeadlessException | NumberFormatException e) {
-                        JOptionPane.showMessageDialog(this, "No puede ingresar otro caracter aparte de numeros!!!");
-                    }
-                    break;
-                case 7:
-                    String genero = JOptionPane.showInputDialog("Ingrese el nuevo genero");
-                    for (int i = 0; i < genre.length; i++) {
-                        if (genero.equals(genre[i])) {
-                            for (int j = 0; j < libros.size(); j++) {
-                                if (modelo.getValueAt(this.jtLibro.getSelectedRow(), 0).equals(libros.get(j).getGenero())) {
-                                    libros.get(j).setGenero(genero);
-                                }
-                            }
-                            modelo.setValueAt(genero, this.jtLibro.getSelectedRow(), col);
-                            break;
-                        }
-                        if (i == genre.length-1) {
-                            JOptionPane.showMessageDialog(this, "No puede Ingresar ese genero!!!");
-                        }
-                    }
-                    break;
-                case 8:
-                    try {
-                        double precio = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el nuevo Precio"));
-                        if (precio > 0) {
-                            for (int i = 0; i < libros.size(); i++) {
-                                if (modelo.getValueAt(this.jtLibro.getSelectedRow(), 0).equals(libros.get(i).getPrecio())) {
-                                    libros.get(i).setPrecio(precio);
-                                }
-                            }
-                            modelo.setValueAt(precio, this.jtLibro.getSelectedRow(), col);
-                        }else{
-                            JOptionPane.showMessageDialog(this, "No puede ingresar un precio menor a 1 ");
-                        }
-                    } catch (HeadlessException | NumberFormatException e) {
-                        JOptionPane.showMessageDialog(this, "No puede ingresar otro caracter aparte de numeros!!!");
-                    }
-                    break;
             }
-            this.jtLibro.setModel(modelo);
+            this.tblProductos.setModel(modelo);
         }
     }//GEN-LAST:event_btnModificarMouseClicked
+
+    private void tglCambioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tglCambioItemStateChanged
+        if (this.tglCambio.isSelected()) {
+            this.tglCambio.setText("Funcion Agregar");
+            this.btnEliminar.setEnabled(false);
+            this.btnModificar.setEnabled(false);
+            this.txtMarca.setEnabled(true);
+            this.txtNombre.setEnabled(true);
+            this.cmbColorantes.setEnabled(true);
+            this.cmbNacional.setEnabled(true);
+            this.spnAlcohol.setEnabled(true);
+            this.spnAzucar.setEnabled(true);
+            this.spnCantidad.setEnabled(true);
+            this.spnCodigo.setEnabled(true);
+            this.spnLote.setEnabled(true);
+            this.spnPercio.setEnabled(true);
+            this.lstColorantes.setEnabled(true);
+            this.btnAgrColorante.setEnabled(true);
+            this.dateCHFecha.setEnabled(true);
+            this.btnAgregar.setEnabled(true);
+        }else{
+            this.tglCambio.setText("Funcion Modificar/Eliminar");
+            this.btnEliminar.setEnabled(true);
+            this.btnModificar.setEnabled(true);
+            this.txtMarca.setEnabled(false);
+            this.txtNombre.setEnabled(false);
+            this.cmbColorantes.setEnabled(false);
+            this.cmbNacional.setEnabled(false);
+            this.spnAlcohol.setEnabled(false);
+            this.spnAzucar.setEnabled(false);
+            this.spnCantidad.setEnabled(false);
+            this.spnCodigo.setEnabled(false);
+            this.spnLote.setEnabled(false);
+            this.spnPercio.setEnabled(false);
+            this.lstColorantes.setEnabled(false);
+            this.btnAgrColorante.setEnabled(false);
+            this.dateCHFecha.setEnabled(false);
+            this.btnAgregar.setEnabled(false);
+        }
+    }//GEN-LAST:event_tglCambioItemStateChanged
+
+    private void btnFacturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFacturaMouseClicked
+        this.jdConsulta.setModal(true); //Permite que al abrir la subventana, se bloquee la vista anterior
+        this.jdConsulta.pack();
+        this.jdConsulta.setLocationRelativeTo(this);
+        this.jdConsulta.setVisible(true);    
+        this.tblProductosFact.setModel(this.tblProductos.getModel());
+    }//GEN-LAST:event_btnFacturaMouseClicked
+
+    private void btnAgregarListaFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarListaFacturaActionPerformed
+        if (this.tblProductos.getSelectedRow() >= 0) {
+            modelo = (DefaultTableModel) this.tblProductos.getModel();
+            modeloLista = (DefaultListModel) this.lstFactura.getModel();
+            for (int i = 0; i < inventario.size(); i++) {
+                if (modelo.getValueAt(this.tblProductos.getSelectedRow(), 0).equals(inventario.get(i).getNombre())) {
+                    try {
+                        int cantidad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de producto!!!"));
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(this.jdConsulta, "Solo puede Ingresar Numeros!!!!\nIntentelo denuevo.");
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_btnAgregarListaFacturaActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        if (this.tblProductos.getSelectedRow() >= 0) {
+            modelo = (DefaultTableModel) this.tblProductos.getModel(); 
+            modelo.removeRow(this.tblProductos.getSelectedRow());
+            for (int i = 0; i < inventario.size(); i++) {
+                if (modelo.getValueAt(this.tblProductos.getSelectedRow(), 0).equals(inventario.get(i).getNombre())) {
+                    inventario.remove(inventario.get(i));
+                }
+            }
+            this.tblProductos.setModel(modelo);
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -540,13 +623,16 @@ public class main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgrColorante;
     private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnAgregarListaFactura;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnFactura;
+    private javax.swing.JButton btnGenerarFactura;
     private javax.swing.JButton btnModificar;
     private javax.swing.JComboBox<String> cmbColorantes;
     private javax.swing.JComboBox<String> cmbNacional;
     private com.toedter.calendar.JDateChooser dateCHFecha;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -560,7 +646,11 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JDialog jdConsulta;
     private javax.swing.JList<String> lstColorantes;
+    private javax.swing.JList<String> lstFactura;
     private javax.swing.JSpinner spnAlcohol;
     private javax.swing.JSpinner spnAzucar;
     private javax.swing.JSpinner spnCantidad;
@@ -568,6 +658,8 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JSpinner spnLote;
     private javax.swing.JSpinner spnPercio;
     private javax.swing.JTable tblProductos;
+    private javax.swing.JTable tblProductosFact;
+    private javax.swing.JToggleButton tglCambio;
     private javax.swing.JTextField txtMarca;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
