@@ -778,6 +778,7 @@ public class main extends javax.swing.JFrame {
             } catch (IOException ex) {
                 Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
             }
+            inventarioFactura = new ArrayList();
         }
     }//GEN-LAST:event_btnGenerarFacturaMouseClicked
 
