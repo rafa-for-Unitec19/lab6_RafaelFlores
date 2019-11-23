@@ -93,6 +93,8 @@ public class main extends javax.swing.JFrame {
         tglCambio = new javax.swing.JToggleButton();
         btnFactura = new javax.swing.JButton();
         btnConfirmMod = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
 
         jdConsulta.setResizable(false);
 
@@ -208,7 +210,7 @@ public class main extends javax.swing.JFrame {
 
         spnAlcohol.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 1));
 
-        spnLote.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        spnLote.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
 
         spnCantidad.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
@@ -269,10 +271,10 @@ public class main extends javax.swing.JFrame {
             }
         });
 
-        jLabel11.setText("Fecha");
+        jLabel11.setText("Fecha Vencimiento");
 
         tglCambio.setSelected(true);
-        tglCambio.setText("Agregar (Habilitar Controles)");
+        tglCambio.setText("(Habilitar Controles)");
         tglCambio.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 tglCambioItemStateChanged(evt);
@@ -287,6 +289,11 @@ public class main extends javax.swing.JFrame {
         });
 
         btnConfirmMod.setText("Mod");
+        btnConfirmMod.setEnabled(false);
+
+        jLabel12.setText("Para Modificar seleccione la CELDA de su eleccion y presione Modificar");
+
+        jLabel13.setText("Para Eliminar seleccione la fila de su elecion y presione eliminar ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -361,7 +368,12 @@ public class main extends javax.swing.JFrame {
                                             .addComponent(spnPercio, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addComponent(jLabel11)
                                     .addComponent(dateCHFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -425,7 +437,11 @@ public class main extends javax.swing.JFrame {
                             .addComponent(btnModificar)
                             .addComponent(btnEliminar)
                             .addComponent(btnFactura))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel13)
+                .addContainerGap())
         );
 
         pack();
@@ -527,9 +543,112 @@ public class main extends javax.swing.JFrame {
                     modelo.setValueAt(marca, this.tblProductos.getSelectedRow(), col);
                     break;
                 case 2:
-                    this.spnCodigo.setEnabled(true);
-                    this.btnConfirmMod.setVisible(true);
-                    
+                    try {
+                        int codigo = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el nuevo Codigo"));
+                        if (codigo > 10203000 && codigo < 99999999) {
+                            for (int i = 0; i < inventario.size(); i++) {
+                                if (modelo.getValueAt(this.tblProductos.getSelectedRow(), 0).equals(inventario.get(i).getCodigo())) {
+                                    for (int j = 0; j < inventario.size(); j++) {
+                                        if (inventario.get(j).getCodigo() == inventario.get(i).getCodigo()) {
+                                            JOptionPane.showMessageDialog(this, "No puede ingresar 2 productos con el mismo código");
+                                            return;
+                                        }
+                                    }
+                                    inventario.get(i).setCodigo(codigo);
+                                }
+                            }
+                            modelo.setValueAt(codigo, this.tblProductos.getSelectedRow(), col);
+                        }else{
+                            JOptionPane.showMessageDialog(this, "No puede ingresar un codigo con menos de 8 digitos");
+                        }
+                    } catch (HeadlessException | NumberFormatException e) {
+                        JOptionPane.showMessageDialog(this, "No puede ingresar otro caracter aparte de numeros!!!");
+                    }
+                    break;
+                case 3:
+                    try {
+                        int codigo = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la Nueva Cantidad de Azucar"));
+                        if (codigo > 0) {
+                            for (int i = 0; i < inventario.size(); i++) {
+                                if (modelo.getValueAt(this.tblProductos.getSelectedRow(), 0).equals(inventario.get(i).getCantAzucar())) {
+                                    inventario.get(i).setCantAzucar(codigo);
+                                }
+                            }
+                            modelo.setValueAt(codigo, this.tblProductos.getSelectedRow(), col);
+                        }else{
+                            JOptionPane.showMessageDialog(this, "No puede ingresar una cantida de Azucar Negativa");
+                        }
+                    } catch (HeadlessException | NumberFormatException e) {
+                        JOptionPane.showMessageDialog(this, "No puede ingresar otro caracter aparte de numeros!!!");
+                    }
+                    break;
+                case 4:
+                    try {
+                        int codigo = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la Nueva Cantidad de Alcohol"));
+                        if (codigo >= 0 && codigo <= 100) {
+                            for (int i = 0; i < inventario.size(); i++) {
+                                if (modelo.getValueAt(this.tblProductos.getSelectedRow(), 0).equals(inventario.get(i).getCantAlcohol())) {
+                                    inventario.get(i).setCantAlcohol(codigo);
+                                }
+                            }
+                            modelo.setValueAt(codigo, this.tblProductos.getSelectedRow(), col);
+                        }else{
+                            JOptionPane.showMessageDialog(this, "No puede ingresar una cantida de Alcohol Negativa o Mayor a 100");
+                        }
+                    } catch (HeadlessException | NumberFormatException e) {
+                        JOptionPane.showMessageDialog(this, "No puede ingresar otro caracter aparte de numeros!!!");
+                    }
+                    break;
+                case 5:
+                    try {
+                        int codigo = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el nuevo Lote"));
+                        if (codigo > 0 ) {
+                            for (int i = 0; i < inventario.size(); i++) {
+                                if (modelo.getValueAt(this.tblProductos.getSelectedRow(), 0).equals(inventario.get(i).getNumLote())) {
+                                    inventario.get(i).setNumLote(codigo);
+                                }
+                            }
+                            modelo.setValueAt(codigo, this.tblProductos.getSelectedRow(), col);
+                        }else{
+                            JOptionPane.showMessageDialog(this, "No puede ingresar un Lote Negativo");
+                        }
+                    } catch (HeadlessException | NumberFormatException e) {
+                        JOptionPane.showMessageDialog(this, "No puede ingresar otro caracter aparte de numeros!!!");
+                    }
+                    break;
+                case 7:
+                    try {
+                        double codigo = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el nuevo Precio"));
+                        if (codigo > 0 ) {
+                            for (int i = 0; i < inventario.size(); i++) {
+                                if (modelo.getValueAt(this.tblProductos.getSelectedRow(), 0).equals(inventario.get(i).getPrecio())) {
+                                    inventario.get(i).setPrecio(codigo);
+                                }
+                            }
+                            modelo.setValueAt(codigo, this.tblProductos.getSelectedRow(), col);
+                        }else{
+                            JOptionPane.showMessageDialog(this, "No puede ingresar un Precio Negativo");
+                        }
+                    } catch (HeadlessException | NumberFormatException e) {
+                        JOptionPane.showMessageDialog(this, "No puede ingresar otro caracter aparte de numeros!!!");
+                    }
+                    break;
+                case 9:
+                    try {
+                        int codigo = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la Nueva Cantidad"));
+                        if (codigo > 0) {
+                            for (int i = 0; i < inventario.size(); i++) {
+                                if (modelo.getValueAt(this.tblProductos.getSelectedRow(), 0).equals(inventario.get(i).getCantidad())) {
+                                    inventario.get(i).setCantidad(codigo);
+                                }
+                            }
+                            modelo.setValueAt(codigo, this.tblProductos.getSelectedRow(), col);
+                        }else{
+                            JOptionPane.showMessageDialog(this, "No puede ingresar un Precio Negativo");
+                        }
+                    } catch (HeadlessException | NumberFormatException e) {
+                        JOptionPane.showMessageDialog(this, "No puede ingresar otro caracter aparte de numeros!!!");
+                    }
                     break;
             }
             this.tblProductos.setModel(modelo);
@@ -619,7 +738,7 @@ public class main extends javax.swing.JFrame {
                         int cantidad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de producto!!!"));
                         inventarioFactura.add(inventario.get(i));
                         cantidades.add(cantidad);
-                        String Node = inventario.get(i).toString() + cantidad;
+                        String Node = inventario.get(i).toString() +" <==========> "+ cantidad;
                         modeloLista.addElement(Node);
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(this.jdConsulta, "Solo puede Ingresar Numeros!!!!\nIntentelo denuevo.");
@@ -734,6 +853,8 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
