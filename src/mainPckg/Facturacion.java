@@ -6,53 +6,60 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Facturacion {
     private ArrayList<Producto> producto = new ArrayList();
-    private int cantidad, numeroFac;
+    private ArrayList<Integer> cantidad = new ArrayList();
+    private int  numeroFac;
     private double precioTot = 0;
 
-    public Facturacion( int cantidad, int numeroFac) {
-        this.cantidad = cantidad;
+    public Facturacion(int numeroFac, ArrayList<Producto> producto, ArrayList<Integer> cantidad) {
         this.numeroFac = numeroFac;
+        this.producto = producto;
+        this.cantidad = cantidad;
     }
     
     public void escribirArchivo() throws IOException {
         Date fechaRaw = new Date();
-        String Fecha = fechaRaw.getDay() + "/" + fechaRaw.getMonth() + "/" + fechaRaw.getYear();
+        SimpleDateFormat form = new SimpleDateFormat("dd/MM/yyyy");
+        form.format(fechaRaw);
         File archivo = new File("./Factura "+numeroFac+".txt");
         FileWriter fw = null;
         BufferedWriter bw = null;
         try {
             fw = new FileWriter(archivo, false);
             bw = new BufferedWriter(fw);
-                bw.write("        SuperMercado El Barrio");
-                bw.write("  Factura#: "+numeroFac+"\t"+Fecha);
-                bw.write("Produc.                Cant      Precio");
+                bw.write("        SuperMercado El Barrio\n");
+                bw.write("  Factura#: "+numeroFac+"\t"+form.format(fechaRaw)+"\n");
+                bw.write("Produc.                Cant      Precio\n");
                 for (int i = 0; i < producto.size(); i++) {
-                    bw.write(Row(producto.get(i)));
+                    
+                    bw.write(Row(producto.get(i), i)+"\n");
                 }
-                bw.write("\t\t\tTotal:");
-                bw.write("\t\t\t  L:"+CountTotal());
+                System.out.println("Holis");
+                bw.write("\t\t\tTotal:"+"\n");
+                bw.write("\t\t\t  L:"+CountTotal()+"\n");
                 bw.newLine();
             
             bw.flush();
         } catch (Exception e) {
+            e.printStackTrace();
         }
         bw.close();
         fw.close();
     }
 
-    private String Row(Producto p) {
-        String format = "%15n\t%2d\tL.%.2f";
-        return String.format(format, p.getNombre(), this.cantidad, p.getPrecio());
+    private String Row(Producto p, int pos) {
+        String format = "%-15s\t\t%2d\tL.%.2f";
+        return String.format(format, p.getNombre(), this.cantidad.get(pos), p.getPrecio());
     }
     
     private double CountTotal(){
-        for (Producto producto1 : producto) {
-            precioTot += producto1.getPrecio();
+        for (int i = 0; i < producto.size(); i++) {
+            precioTot += producto.get(i).getPrecio() * cantidad.get(i);
         }
         return precioTot;
     }

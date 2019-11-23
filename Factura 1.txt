@@ -1,0 +1,8 @@
+        SuperMercado El Barrio
+  Factura#: 1	22/11/2019
+Produc.                Cant      Precio
+Choco Sula     		12	L.100.00
+Vaini Sula     		13	L.50.00
+			Total:
+			  L:1850.0
+

@@ -1,2 +1,15 @@
-10203001;2;20;1;58;Smirnorff;Smirnorff;Azul-4,Rojo-69,Verde-420;120.0;22/11/2019;false;
-10203003;2;0;100;75;Sula;Quanty;Amarillo-77, Rojo-69;12.0;0/10/120;true;
+10203001;2;20;100;58;Smirnorff;Smirnorff;Azul-4,Rojo-69,Verde-420;120.0;22/11/2020;false;
+10203002;1;0;101;75;Sula;Quanty;Amarillo-77, Rojo-69;12.0;23/10/2020;true;
+10203003;3;30;102;100;Sula;Vaini Sula;Azul-4,Rojo-69,Verde-420;50.0;24/11/2020;false;
+10203004;2;40;103;110;Sula;Choco Sula;Azul-4,Rojo-69,Verde-420;100.0;25/11/2020;true;
+10203005;4;50;104;120;Sula;Fresi Sula;Azul-4,Rojo-69,Verde-420;5.0;26/11/2020;false;
+10203006;2;40;105;130;Sula;Agua;Azul-4,Rojo-69,Verde-420;45.0;27/11/2020;true;
+10203007;1;30;106;140;Marca 1;Bebida 1;Azul-4,Rojo-69,Verde-420;10.0;28/11/2020;false;
+10203008;3;20;107;150;Marca 2;Bebida 2;Azul-4,Rojo-69,Verde-420;30.0;29/11/2020;true;
+10203009;5;10;108;145;Marca 3;Bebida 3;Azul-4,Rojo-69,Verde-420;125.0;30/11/2020;false;
+10203010;1;5;109;135;Marca 4;Bebida 4;Azul-4,Rojo-69,Verde-420;115.0;20/10/2020;true;
+10203011;2;9;110;125;Marca 5;Bebida 5;Azul-4,Rojo-69,Verde-420;160.0;19/10/2020;false;
+10203012;3;10;111;115;Marca 6;Bebida 6;Azul-4,Rojo-69,Verde-420;150.0;18/10/2020;true;
+10203013;1;20;112;105;Marca 7;Bebida 7;Azul-4,Rojo-69,Verde-420;140.0;17/10/2020;false;
+10203014;1;35;113;75;Marca 8;Bebida 8;Azul-4,Rojo-69,Verde-420;130.0;16/10/2020;true;
+10203015;3;15;114;85;Marca 9;Imperial;Azul-4,Rojo-69,Verde-420;110.0;15/10/2020;false;
